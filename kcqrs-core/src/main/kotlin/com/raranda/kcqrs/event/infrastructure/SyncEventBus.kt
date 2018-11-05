@@ -3,13 +3,22 @@ package com.raranda.kcqrs.event.infrastructure
 import com.raranda.kcqrs.event.domain.DomainEvent
 import com.raranda.kcqrs.event.domain.EventBus
 import com.raranda.kcqrs.event.domain.EventHandler
+import kotlin.reflect.KClass
 
 class SyncEventBus: EventBus {
+    private val handlers: MutableMap<KClass<*>, MutableList<EventHandler<*>>> = mutableMapOf()
+
     override fun <E : DomainEvent> register(handler: EventHandler<E>) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        val eventClass = handler.eventClass()
+        handlers.computeIfAbsent(eventClass) { mutableListOf() }
+        handlers[eventClass]!!.add(handler)
     }
 
-    override fun send(event: DomainEvent) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    @Suppress("UNCHECKED_CAST")
+    override fun publish(event: DomainEvent) {
+        handlers[event::class]
+                ?.asSequence()
+                ?.map { it as EventHandler<DomainEvent> }
+                ?.forEach { it.on(event) } //TODO: Handle exceptions
     }
 }

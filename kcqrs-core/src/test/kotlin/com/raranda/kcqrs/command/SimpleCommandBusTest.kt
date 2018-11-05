@@ -19,11 +19,11 @@ class SimpleCommandBusTest: ShouldSpec(
             val handler = TestCommandHandler()
             val commandHandler = SimpleCommandBus().apply { register(handler) }
 
-            should("it should handle command successfully") {
+            should("handle command successfully") {
                 commandHandler.handle<String>(query) shouldBe expected
             }
 
-            should("it should raise exception if no handler is found") {
+            should("raise exception if no handler is found") {
                 class FailingTestCommand: Command
                 val failingCommand = FailingTestCommand()
                 val exception = assertFailsWith<NoRegisteredHandlerException> {

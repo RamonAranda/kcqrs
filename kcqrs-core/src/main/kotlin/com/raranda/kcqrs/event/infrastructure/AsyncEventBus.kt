@@ -9,7 +9,7 @@ class AsyncEventBus: EventBus {
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 
-    override fun send(event: DomainEvent) {
+    override fun publish(event: DomainEvent) {
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 }

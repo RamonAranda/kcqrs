@@ -24,12 +24,12 @@ class SuspendableCommandBusTest: ShouldSpec(
             val handler = TestThreadAwareCommandHandler()
             val commandBus = SuspendableCommandBus().apply { register(handler) }
 
-            should("it should handle command successfully") {
+            should("handle command successfully") {
                 commandBus.handle<String>(command) shouldBe expected
                 handler.threadId shouldNotBe Thread.currentThread().id
             }
 
-            should("it should raise exception if no handler is found") {
+            should("raise exception if no handler is found") {
                 class FailingTestCommand: Command
                 val failingCommand = FailingTestCommand()
                 val exception = assertFailsWith<NoRegisteredHandlerException> {

@@ -19,11 +19,11 @@ class SimpleQueryBusTest: ShouldSpec(
             val handler = TestQueryHandler()
             val queryBus = SimpleQueryBus().apply { register(handler) }
 
-            should("it should handle query successfully") {
+            should("handle query successfully") {
                 queryBus.handle<String>(query) shouldBe expected
             }
 
-            should("it should raise exception if no handler is found") {
+            should("raise exception if no handler is found") {
                 class FailingTestQuery: Query
                 val failingQuery = FailingTestQuery()
                 val exception = assertFailsWith<NoRegisteredHandlerException> {
