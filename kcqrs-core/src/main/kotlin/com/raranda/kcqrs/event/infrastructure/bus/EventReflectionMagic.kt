@@ -1,4 +1,4 @@
-package com.raranda.kcqrs.event.infrastructure
+package com.raranda.kcqrs.event.infrastructure.bus
 
 import com.raranda.kcqrs.event.domain.DomainEvent
 import com.raranda.kcqrs.event.domain.EventHandler
