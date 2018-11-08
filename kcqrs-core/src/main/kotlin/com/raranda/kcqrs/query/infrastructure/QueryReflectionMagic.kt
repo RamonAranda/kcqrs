@@ -5,7 +5,7 @@ import com.raranda.kcqrs.query.domain.QueryHandler
 import kotlin.reflect.full.isSubclassOf
 import kotlin.reflect.jvm.jvmErasure
 
-internal fun <Q : Query> QueryHandler<Q, *>.queryClass() =
+fun <Q : Query> QueryHandler<Q, *>.queryClass() =
         javaClass.kotlin
                 .supertypes.first { it.jvmErasure.isSubclassOf(QueryHandler::class) }
                 .arguments.first()
