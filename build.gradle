@@ -1,11 +1,48 @@
-plugins {
-    id 'org.jetbrains.kotlin.jvm' version "1.3.0"
-}
+apply plugin: "java"
+apply plugin: "maven"
+
+group = "com.raranda.kcqrs"
+version = 0.1
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
 
 repositories {
     mavenCentral()
 }
 
+sourceSets {
+    core
+    coroutines
+    spring
+}
+
+sourceSets.all { set ->
+    def jarTask = task("${set.name}Jar", type: Jar) {
+        baseName = "$set.name"
+        from set.output
+    }
+
+    artifacts {
+        archives jarTask
+    }
+}
+
 dependencies {
-    compile "org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.3.0"
+    coreCompile project(":kcqrs-core")
+    coroutinesCompile project(":kcqrs-coroutines")
+    springCompile project(":kcqrs-spring")
+}
+
+jar {
+    from sourceSets.core.output
+    from sourceSets.coroutines.output
+    from sourceSets.spring.output
+}
+
+install {
+    repositories.mavenInstaller {
+        addFilter('core') { artifact, file -> artifact.name.endsWith('core') }
+        addFilter('coroutines') { artifact, file -> artifact.name.endsWith('coroutines') }
+        addFilter('spring') { artifact, file -> artifact.name.endsWith('spring') }
+    }
 }
