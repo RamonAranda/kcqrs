@@ -4,13 +4,14 @@ import com.raranda.kcqrs.command.domain.Command
 import com.raranda.kcqrs.command.domain.CommandBus
 import com.raranda.kcqrs.command.domain.CommandHandler
 import com.raranda.kcqrs.shared.NoRegisteredHandlerException
+import com.raranda.kcqrs.shared.firstSuperClassGeneric
 import kotlin.reflect.KClass
 
 class SimpleCommandBus : CommandBus {
     private val handlers: MutableMap<KClass<*>, CommandHandler<*, *>> = mutableMapOf()
 
     override fun <C : Command> register(handler: CommandHandler<C, *>) {
-        handlers[handler.commandClass()] = handler
+        handlers[handler.firstSuperClassGeneric()!!] = handler
     }
 
     @Suppress("UNCHECKED_CAST")

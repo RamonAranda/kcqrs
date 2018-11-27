@@ -12,8 +12,9 @@ repositories {
 
 sourceSets {
     core
-    coroutines
     spring
+    coroutinesCore
+    coroutinesSpring
 }
 
 sourceSets.all { set ->
@@ -29,20 +30,23 @@ sourceSets.all { set ->
 
 dependencies {
     coreCompile project(":kcqrs-core")
-    coroutinesCompile project(":kcqrs-coroutines")
     springCompile project(":kcqrs-spring")
+    coroutinesCoreCompile project(":kcqrs-coroutines-core")
+    coroutinesSpringCompile project(":kcqrs-coroutines-spring")
 }
 
 jar {
     from sourceSets.core.output
-    from sourceSets.coroutines.output
     from sourceSets.spring.output
+    from sourceSets.coroutinesCore.output
+    from sourceSets.coroutinesSpring.output
 }
 
 install {
     repositories.mavenInstaller {
         addFilter('core') { artifact, file -> artifact.name.endsWith('core') }
-        addFilter('coroutines') { artifact, file -> artifact.name.endsWith('coroutines') }
         addFilter('spring') { artifact, file -> artifact.name.endsWith('spring') }
+        addFilter('coroutines-core') { artifact, file -> artifact.name.endsWith('coroutines-core') }
+        addFilter('coroutines-spring') { artifact, file -> artifact.name.endsWith('coroutines-spring') }
     }
 }

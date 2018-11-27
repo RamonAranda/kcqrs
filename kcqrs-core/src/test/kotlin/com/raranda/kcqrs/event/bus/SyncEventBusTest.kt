@@ -1,6 +1,5 @@
 package com.raranda.kcqrs.event.bus
 
-import com.raranda.kcqrs.event.domain.DomainEvent
 import com.raranda.kcqrs.event.domain.EventExceptionHandler
 import com.raranda.kcqrs.event.domain.EventHandler
 import com.raranda.kcqrs.event.infrastructure.bus.SyncEventBus

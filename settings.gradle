@@ -1,5 +1,7 @@
 rootProject.name = 'kcqrs'
 
+include 'kcqrs-commons'
 include 'kcqrs-core'
-include 'kcqrs-coroutines'
 include 'kcqrs-spring'
+include 'kcqrs-coroutines-core'
+include 'kcqrs-coroutines-spring'
