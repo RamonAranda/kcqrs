@@ -1,7 +1,9 @@
 package com.raranda.kcqrs.command
 
+import com.raranda.kcqrs.command.domain.Command
 import com.raranda.kcqrs.command.domain.CommandHandler
 import com.raranda.kcqrs.command.infrastructure.SimpleCommandBus
+import com.raranda.kcqrs.shared.NoRegisteredHandlerException
 import io.kotlintest.shouldBe
 import io.kotlintest.specs.ShouldSpec
 import kotlin.test.assertFailsWith

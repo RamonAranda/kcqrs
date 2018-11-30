@@ -1,7 +1,9 @@
 package com.raranda.kcqrs.query
 
+import com.raranda.kcqrs.query.domain.Query
 import com.raranda.kcqrs.query.domain.QueryHandler
 import com.raranda.kcqrs.query.infrastructure.SimpleQueryBus
+import com.raranda.kcqrs.shared.NoRegisteredHandlerException
 import io.kotlintest.shouldBe
 import io.kotlintest.specs.ShouldSpec
 import kotlin.test.assertFailsWith
